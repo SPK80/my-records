@@ -1,6 +1,6 @@
-import { Record } from "./Record";
+import Record from "./Record";
 
-export function Records({ records }) {
+export default function Records({ records }) {
 	return (
 		<div className="Records">
 			<ul>	{

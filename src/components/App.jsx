@@ -1,6 +1,6 @@
 import './App.css';
-import { Records } from './Records';
-import { Header } from './Header';
+import Records from './Records';
+import Header from './Header';
 
 function App() {
 	return (
