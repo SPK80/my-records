@@ -1,14 +1,13 @@
 import './App.css';
-import Button from './Button.jsx';
 import Header from './Header';
 import RecordsContainer from "./RecordsContainer";
-import NewRecord from './NewRecord.jsx';
+import NewRecordContainer from './NewRecordContainer.jsx';
 
 function App() {
 	return (
 		<div className="App">
 			<Header />
-			<NewRecord />
+			<NewRecordContainer />
 			<RecordsContainer />
 		</div>
 	);
