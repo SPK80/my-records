@@ -1,5 +1,8 @@
-export default function Record({ data }) {
+export default function Record({ name, value }) {
 	return (
-		<span>{data}</span>
+		<div>
+			<span className="RecordName">{name}</span>
+			<span className="RecordValue">{value}</span>
+		</div>
 	)
 }

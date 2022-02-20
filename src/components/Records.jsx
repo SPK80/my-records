@@ -2,17 +2,15 @@ import Record from "./Record";
 
 export default function Records({ records }) {
 	return (
-		<div className="Records">
-			<ul>	{
-				records?.map(record =>
-					<li key={record.key.toString()}>
-						<Record
-							data={record.data}
-						/>
-					</li>
-				)
-			}
-			</ul>
+		<div className="Records"> {
+			Object.keys(records).map(key =>
+				<Record
+					key={key}
+					name={key}
+					value={records[key]}
+				/>
+			)
+		}
 		</div>
 	);
 }

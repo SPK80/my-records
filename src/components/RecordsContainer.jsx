@@ -1,11 +1,25 @@
-import { useState } from 'react';
+import React from 'react';
 import Records from './Records';
+import axios from 'axios';
 
-export default function RecordsContainer(props) {
-	const [records, setData] = useState([{ key: 0, data: 'test0' }]);
+export default class RecordsContainer extends React.Component {
 
-	return (
-		<Records records={records} />
-	);
+	state = {
+		records: {}
+	}
+
+	componentDidMount() {
+		axios.get(`http://localhost:8000/api/records`)
+			.then(res => {
+				const records = res.data.data;
+				this.setState({ records });
+			})
+	}
+
+	render() {
+		return (
+			<Records records={this.state.records} />
+		)
+	}
 
 }
