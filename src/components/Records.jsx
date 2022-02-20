@@ -13,7 +13,7 @@ export function Records({ records }) {
 					</li>
 				)
 			}
-			</ul >
+			</ul>
 		</div>
 	);
 }
