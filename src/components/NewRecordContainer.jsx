@@ -4,19 +4,29 @@ import NewRecord from './NewRecord.jsx';
 
 export default class NewRecordContainer extends React.Component {
 
+	#onPost;
+
+	constructor(props) {
+		super(props)
+		this.#onPost = props.onPost
+	}
+
 	state = {
 		name: '',
 		text: ''
 	}
 
 	#post() {
-		const record = {}
-		record[this.state.name] = this.state.text
+		const record = {
+			id: this.state.name,
+			text: this.state.text
+		}
 
 		axios.post(`http://localhost:8000/api/records`, { record })
 			.then(res => {
 				console.log(res);
 				console.log(res.data);
+				this.#onPost();
 			})
 	}
 
