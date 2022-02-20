@@ -1,12 +1,13 @@
 import './App.css';
-import Records from './Records';
 import Header from './Header';
+import RecordsContainer from './RecordsContainer';
 
 function App() {
 	return (
 		<div className="App">
 			<Header />
-			<Records records={[{ key: 0, data: 'test0' }]} />
+			<RecordsContainer />
+
 		</div>
 	);
 }
