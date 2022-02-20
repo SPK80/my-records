@@ -5,9 +5,8 @@ export default function Records({ records }) {
 		<div className="Records">
 			<ul>	{
 				records?.map(record =>
-					<li>
+					<li key={record.key.toString()}>
 						<Record
-							key={record.key.toString()}
 							data={record.data}
 						/>
 					</li>
