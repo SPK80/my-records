@@ -3,16 +3,17 @@ import { Record } from "./Record";
 export function Records({ records }) {
 	return (
 		<div className="Records">
-			records
-			<div>	{
+			<ul>	{
 				records?.map(record =>
-					<Record
-						key={record.key.toString()}
-						data={record.data}
-					/>
+					<li>
+						<Record
+							key={record.key.toString()}
+							data={record.data}
+						/>
+					</li>
 				)
 			}
-			</div>
+			</ul >
 		</div>
 	);
 }
