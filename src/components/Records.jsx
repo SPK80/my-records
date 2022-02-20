@@ -3,7 +3,7 @@ import Record from "./Record";
 export default function Records({ records }) {
 	return (
 		<div className="Records"> {
-			Object.keys(records).map(key =>
+			Object.keys(records).reverse().map(key =>
 				<Record
 					key={key}
 					name={key}
