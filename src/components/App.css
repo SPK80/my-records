@@ -1,5 +1,11 @@
 .App {
   text-align: left;
+  background-color: burlywood;
+	position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+	width: 100%;
 }
 
 .App-header {
@@ -14,4 +20,22 @@
 
 .App-link {
   color: #61dafb;
+}
+
+.New-Record{
+	margin: 5px;
+}
+
+.New-Record-Name{
+	width: calc(100% - 22px);
+	margin-bottom: 5px;
+}
+
+.New-Record-Text{
+	width: calc(100% - 20px);
+	height: 100px;
+}
+
+.Records{
+	margin: 10px;
 }

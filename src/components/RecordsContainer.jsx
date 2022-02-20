@@ -5,7 +5,11 @@ import axios from 'axios';
 export default class RecordsContainer extends React.Component {
 
 	state = {
-		records: {}
+		records: {
+			first: "first record",
+			second: "second record",
+
+		}
 	}
 
 	componentDidMount() {
