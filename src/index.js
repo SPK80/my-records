@@ -5,14 +5,9 @@ import App from './components/App';
 import reportWebVitals from './reportWebVitals';
 
 const rerender = () => {
-	console.log('rerender');
 	ReactDOM.render(
 		<React.StrictMode>
-			<App
-				onForceUpdate={() => {
-
-				}}
-			/>
+			<App />
 		</React.StrictMode>,
 		document.getElementById('root')
 	);

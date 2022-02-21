@@ -12,5 +12,5 @@ export default function Records({ records }) {
 			)
 		}
 		</div>
-	);
+	)
 }
