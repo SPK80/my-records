@@ -13,14 +13,21 @@ export default function RecordsContainer() {
 	const [records, setRecords] = useState({})
 	const [newRecord, setNewRecord] = useState(initalNewRecord)
 
+
+
 	function getAllRecords() {
 		recordsAPI.get()
 			.then(res => {
 				const records = res.data.data;
 				setRecords(records);
 			})
+			.catch(error => console.error(error))
 		return {}
 	}
+
+	useEffect(() => {
+		getAllRecords()
+	}, [])
 
 	function postNewRecord() {
 		const record = {
@@ -37,13 +44,13 @@ export default function RecordsContainer() {
 			.catch(error => console.error(error))
 	}
 
-	useEffect(() => {
-		getAllRecords()
-	}, [])
-
 	function clearRecords() {
-		console.log('clearRecords');
-		// axios.delete()
+		recordsAPI.delete()
+			.then(res => {
+				console.log(res);
+				getAllRecords();
+			})
+			.catch(error => console.error(error))
 	}
 
 	return (
