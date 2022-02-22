@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Records from './Records';
 import RecordInput from './RecordInput';
-import axios from 'axios';
+import recordsAPI from './recordsAPI';
+
 import Button from './Button.jsx';
 
 export default function RecordsContainer() {
@@ -13,8 +14,7 @@ export default function RecordsContainer() {
 	const [newRecord, setNewRecord] = useState(initalNewRecord)
 
 	function getAllRecords() {
-		// console.log('getAllRecords');
-		axios.get(`http://localhost:8000/api/records`)
+		recordsAPI.get()
 			.then(res => {
 				const records = res.data.data;
 				setRecords(records);
@@ -28,9 +28,9 @@ export default function RecordsContainer() {
 			text: newRecord.text
 		}
 
-		axios.post(`http://localhost:8000/api/records`, { record })
+		recordsAPI.post({ record })
 			.then(res => {
-				// console.log(res);
+				console.log(res);
 				setNewRecord(initalNewRecord)
 				getAllRecords();
 			})
