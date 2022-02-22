@@ -21,7 +21,7 @@ export default function RecordsContainer() {
 			})
 		return {}
 	}
-	
+
 	function postNewRecord() {
 		const record = {
 			id: newRecord.name,
@@ -41,6 +41,11 @@ export default function RecordsContainer() {
 		getAllRecords()
 	}, [])
 
+	function clearRecords() {
+		console.log('clearRecords');
+		// axios.delete()
+	}
+
 	return (
 		<div>
 			<RecordInput
@@ -51,6 +56,10 @@ export default function RecordsContainer() {
 			<Button
 				caption='Add'
 				click={() => { postNewRecord() }}
+			/>
+			<Button
+				caption='Clear'
+				click={() => { clearRecords() }}
 			/>
 			<Records records={records} />
 		</div>
