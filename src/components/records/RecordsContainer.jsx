@@ -65,7 +65,7 @@ export default function RecordsContainer() {
 				click={() => { postNewRecord() }}
 			/>
 			<Button
-				caption='Clear'
+				caption='Del'
 				click={() => { clearRecords() }}
 			/>
 			<Records records={records} />

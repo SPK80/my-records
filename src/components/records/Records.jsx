@@ -4,11 +4,13 @@ export default function Records({ records }) {
 	return (
 		<div className="Records"> {
 			Object.keys(records).reverse().map(key =>
-				<Record
-					key={key}
-					name={key}
-					value={records[key]}
-				/>
+				<div key={key}>
+					<input type='checkbox'></input>
+					<Record
+						name={key}
+						value={records[key]}
+					/>
+				</div>
 			)
 		}
 		</div>
