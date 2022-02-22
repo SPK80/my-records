@@ -1,6 +1,6 @@
 import './App.css';
 import Header from './Header';
-import RecordsContainer from "./RecordsContainer";
+import RecordsContainer from "./records";
 
 function App() {
 	return (

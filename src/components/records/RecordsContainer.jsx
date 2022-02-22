@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Records from './Records';
+import NewRecord from './NewRecord';
 import axios from 'axios';
-import NewRecord from './NewRecord.jsx';
 
 export default function RecordsContainer() {
 	const initalNewRecord = {

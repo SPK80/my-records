@@ -1,4 +1,4 @@
-import Button from "./Button.jsx";
+import Button from "./Button";
 
 export default function NewRecord({ record, onNameChanged, onTextChanged, onAddClick }) {
 	return (
