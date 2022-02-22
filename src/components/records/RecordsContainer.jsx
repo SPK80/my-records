@@ -44,13 +44,25 @@ export default function RecordsContainer() {
 			.catch(error => console.error(error))
 	}
 
-	function clearRecords() {
-		recordsAPI.delete()
-			.then(res => {
+	async function delSelectedRecords() {
+		const selectedIds = [];
+		try {
+			for (const id of selectedIds) {
+				await recordsAPI.delete(id)
 				console.log(res);
-				getAllRecords();
-			})
-			.catch(error => console.error(error))
+			}
+			getAllRecords();
+		}
+		catch (error) {
+			console.error(error)
+		}
+
+		// recordsAPI.delete()
+		// 	.then(res => {
+		// 		console.log(res);
+		// 		getAllRecords();
+		// 	})
+		// 	.catch(error => console.error(error))
 	}
 
 	return (
@@ -66,7 +78,7 @@ export default function RecordsContainer() {
 			/>
 			<Button
 				caption='Del'
-				click={() => { clearRecords() }}
+				click={() => { delSelectedRecords() }}
 			/>
 			<Records records={records} />
 		</div>
