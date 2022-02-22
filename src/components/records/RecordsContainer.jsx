@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Records from './Records';
-import NewRecord from './NewRecord';
+import RecordInput from './RecordInput';
 import axios from 'axios';
+import Button from './Button.jsx';
 
 export default function RecordsContainer() {
 	const initalNewRecord = {
@@ -20,7 +21,7 @@ export default function RecordsContainer() {
 			})
 		return {}
 	}
-
+	
 	function postNewRecord() {
 		const record = {
 			id: newRecord.name,
@@ -42,11 +43,14 @@ export default function RecordsContainer() {
 
 	return (
 		<div>
-			<NewRecord
+			<RecordInput
 				record={newRecord}
 				onNameChanged={(name) => { setNewRecord(prev => ({ ...prev, name })) }}
 				onTextChanged={(text) => { setNewRecord(prev => ({ ...prev, text })) }}
-				onAddClick={() => { postNewRecord() }}
+			/>
+			<Button
+				caption='Add'
+				click={() => { postNewRecord() }}
 			/>
 			<Records records={records} />
 		</div>

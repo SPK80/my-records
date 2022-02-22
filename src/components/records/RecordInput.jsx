@@ -1,6 +1,4 @@
-import Button from "./Button";
-
-export default function NewRecord({ record, onNameChanged, onTextChanged, onAddClick }) {
+export default function RecordInput({ record, onNameChanged, onTextChanged }) {
 	return (
 		<div className="New-Record">
 			<input className="New-Record-Name"
@@ -13,10 +11,6 @@ export default function NewRecord({ record, onNameChanged, onTextChanged, onAddC
 				value={record.text}
 			>
 			</textarea>
-			<Button
-				caption='Add'
-				click={onAddClick}
-			/>
 		</div>
 	);
 }
