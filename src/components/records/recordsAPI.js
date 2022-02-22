@@ -4,5 +4,5 @@ const baseUrl = 'http://localhost:8000/api/records/';
 export default {
 	get: (query = '') => axios.get(baseUrl + query),
 	post: (record) => axios.post(baseUrl, record),
-	delete: (id = '') => axios.delete(baseUrl + id)
+	delete: (id = '') => axios.delete(baseUrl + '?id=' + id)
 };

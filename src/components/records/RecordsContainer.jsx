@@ -44,25 +44,25 @@ export default function RecordsContainer() {
 			.catch(error => console.error(error))
 	}
 
+	const [selectedIds, setSelectedIds] = useState([])
+	useEffect(() => {
+		console.log('selected:', selectedIds);
+	}, [selectedIds])
+
 	async function delSelectedRecords() {
-		const selectedIds = [];
+		if (selectedIds.length < 1) return;
+
 		try {
 			for (const id of selectedIds) {
 				const res = await recordsAPI.delete(id)
 				console.log(res);
 			}
 			getAllRecords();
+			setSelectedIds([]);
 		}
 		catch (error) {
 			console.error(error)
 		}
-
-		// recordsAPI.delete()
-		// 	.then(res => {
-		// 		console.log(res);
-		// 		getAllRecords();
-		// 	})
-		// 	.catch(error => console.error(error))
 	}
 
 	return (
@@ -80,7 +80,19 @@ export default function RecordsContainer() {
 				caption='Del'
 				click={() => { delSelectedRecords() }}
 			/>
-			<Records records={records} />
+			<Records
+				records={records}
+				onSelectionChanged={(id, checked) => {
+					if (checked)
+						setSelectedIds(prev => [...prev, id])
+					else
+						setSelectedIds(prev => {
+							const s = [...prev];
+							s.splice(prev.indexOf(id), 1)
+							return s
+						})
+				}}
+			/>
 		</div>
 	)
 
