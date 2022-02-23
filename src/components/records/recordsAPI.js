@@ -1,5 +1,6 @@
 import axios from 'axios';
-const baseUrl = 'http://localhost:8000/api/records/';
+import config from '../../config.json'
+const baseUrl = `http://${config.server.host}:${config.server.port}/api/records/`;
 
 export default {
 	get: (query = '') => axios.get(baseUrl + query),
