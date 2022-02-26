@@ -39,3 +39,16 @@
 .Records{
 	margin: 10px;
 }
+
+.Record{
+	margin: 10px;
+}
+
+.RecordName{
+	margin: 10px;
+	font-weight: bold;
+}
+
+.RecordValue{
+	margin: 10px;	
+}
