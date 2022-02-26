@@ -1,6 +1,6 @@
 import Record from "./Record";
 
-export default function Records({ records, onSelectionChanged }) {
+export default function Records({ records, onSelectionChanged, onEdit }) {
 	return (
 		<div className="Records"> {
 			Object.keys(records).reverse().map(key =>
@@ -9,6 +9,7 @@ export default function Records({ records, onSelectionChanged }) {
 						name={key}
 						value={records[key]}
 						onSelectionChanged={onSelectionChanged}
+						onEdit={onEdit}
 					/>
 				</div>
 			)

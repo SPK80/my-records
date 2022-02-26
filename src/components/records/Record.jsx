@@ -1,6 +1,6 @@
-export default function Record({ name, value, onSelectionChanged }) {
+export default function Record({ name, value, onSelectionChanged, onEdit }) {
 	return (
-		<div className="Record" >
+		<div className="Record"		>
 			<input
 				id={name}
 				type='checkbox'
@@ -9,7 +9,14 @@ export default function Record({ name, value, onSelectionChanged }) {
 				}}
 			></input>
 			<span className="RecordName">{name}</span>
-			<pre className="RecordValue">{value}</pre>
+			<pre
+				id={name}
+				className="RecordValue"
+				onDoubleClick={(e) => {
+					onEdit(e.target.id, e.target.innerText)
+					// console.log(e.target.innerText);
+				}}
+			>{value}</pre>
 		</div >
 	)
 }

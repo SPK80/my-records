@@ -13,8 +13,6 @@ export default function RecordsContainer() {
 	const [records, setRecords] = useState({})
 	const [newRecord, setNewRecord] = useState(initalNewRecord)
 
-
-
 	function getAllRecords() {
 		recordsAPI.get()
 			.then(res => {
@@ -30,6 +28,7 @@ export default function RecordsContainer() {
 	}, [])
 
 	function postNewRecord() {
+
 		const record = {
 			id: newRecord.name,
 			text: newRecord.text
@@ -65,6 +64,10 @@ export default function RecordsContainer() {
 		}
 	}
 
+	function editRecord(name, text) {
+		setNewRecord({ name, text })
+	}
+
 	return (
 		<div>
 			<RecordInput
@@ -92,8 +95,12 @@ export default function RecordsContainer() {
 							return s
 						})
 				}}
+				onEdit={
+					(name, text) => {
+						editRecord(name, text);
+					}
+				}
 			/>
 		</div>
 	)
-
 }
