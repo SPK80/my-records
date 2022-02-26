@@ -41,7 +41,9 @@
 }
 
 .Record{
-	margin: 10px;
+	background-color: beige;
+	margin: 1px;
+	padding: 3px;
 }
 
 .RecordName{
