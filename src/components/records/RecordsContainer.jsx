@@ -27,18 +27,22 @@ export default function RecordsContainer() {
 		getAllRecords()
 	}, [])
 
-	function postNewRecord() {
-
-		const record = {
-			id: newRecord.name,
-			text: newRecord.text
-		}
-
-		recordsAPI.post({ record })
+	function postNewRecord(id, text) {
+		recordsAPI.post({ record: { id, text } })
 			.then(res => {
-				console.log(res);
+				console.log(res)
 				setNewRecord(initalNewRecord)
-				getAllRecords();
+				getAllRecords()
+			})
+			.catch(error => console.error(error))
+	}
+
+	function putRecord(id, text) {
+		recordsAPI.put({ record: { id, text } })
+			.then(res => {
+				console.log(res)
+				setNewRecord(initalNewRecord)
+				getAllRecords()
 			})
 			.catch(error => console.error(error))
 	}
@@ -64,8 +68,24 @@ export default function RecordsContainer() {
 		}
 	}
 
-	function editRecord(name, text) {
-		setNewRecord({ name, text })
+	const [editingId, setEditingId] = useState('')
+	useEffect(() => {
+		console.log('editingId:', editingId);
+	}, [editingId])
+
+	function editRecord(id, text) {
+		setNewRecord({ id, text });
+		setEditingId(id);
+	}
+
+	function delRecord(id) {
+		recordsAPI.delete(id)
+			.then(res => {
+				getAllRecords()
+			})
+			.catch(error => console.error(error))
+		return {}
+
 	}
 
 	return (
@@ -76,8 +96,12 @@ export default function RecordsContainer() {
 				onTextChanged={(text) => { setNewRecord(prev => ({ ...prev, text })) }}
 			/>
 			<Button
-				caption='Add'
-				click={() => { postNewRecord() }}
+				caption='Post'
+				click={() => { postNewRecord(newRecord.name, newRecord.text) }}
+			/>
+			<Button
+				caption='Put'
+				click={() => { putRecord(newRecord.name, newRecord.text) }}
 			/>
 			<Button
 				caption='Del'
@@ -95,9 +119,14 @@ export default function RecordsContainer() {
 							return s
 						})
 				}}
-				onEdit={
-					(name, text) => {
-						editRecord(name, text);
+				editClick={
+					(id, text) => {
+						editRecord(id, text);
+					}
+				}
+				delClick={
+					(id) => {
+						delRecord(id)
 					}
 				}
 			/>

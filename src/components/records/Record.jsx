@@ -1,22 +1,31 @@
-export default function Record({ name, value, onSelectionChanged, onEdit }) {
+// import { useState } from "react";
+import Button from "./Button.jsx";
+
+export default function Record({ name, value, onSelectionChanged, editClick, delClick }) {
+	// const [id, setID] = useState(name);
+
 	return (
-		<div className="Record"		>
+		<div className="Record">
+
 			<input
-				id={name}
 				type='checkbox'
-				onChange={(e) => {
-					onSelectionChanged(e.target.id, e.target.checked)
-				}}
+				onChange={(e) => onSelectionChanged(name, e.target.checked)}
 			></input>
+
 			<span className="RecordName">{name}</span>
-			<pre
-				id={name}
-				className="RecordValue"
-				onDoubleClick={(e) => {
-					onEdit(e.target.id, e.target.innerText)
-					// console.log(e.target.innerText);
-				}}
-			>{value}</pre>
+
+			<pre className="RecordValue">{value}</pre>
+
+			<Button
+				caption='Del'
+				click={() => { delClick(name) }}
+			/>
+
+			<Button
+				caption='Edit'
+				click={() => { editClick(name) }}
+			/>
+
 		</div >
 	)
 }
