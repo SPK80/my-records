@@ -7,11 +7,11 @@ import Button from './Button.jsx';
 
 export default function RecordsContainer() {
 	const initalNewRecord = {
-		name: '',
+		id: '',
 		text: ''
 	}
 	const [records, setRecords] = useState({})
-	const [newRecord, setNewRecord] = useState(initalNewRecord)
+	const [inputRecord, setInputRecord] = useState(initalNewRecord)
 
 	function getAllRecords() {
 		recordsAPI.get()
@@ -19,7 +19,7 @@ export default function RecordsContainer() {
 				const records = res.data.data;
 				setRecords(records);
 			})
-			.catch(error => console.error(error))
+			.catch(console.error)
 		return {}
 	}
 
@@ -29,21 +29,22 @@ export default function RecordsContainer() {
 		recordsAPI.post({ record: { id, text } })
 			.then(res => {
 				console.log(res)
-				setNewRecord(initalNewRecord)
+				setInputRecord(initalNewRecord)
 				setShowEditor(false)
 				getAllRecords()
 			})
-			.catch(error => console.error(error))
+			.catch(console.error)
 	}
 
 	function putRecord(id, text) {
 		recordsAPI.put({ record: { id, text } })
 			.then(res => {
 				console.log(res)
-				setNewRecord(initalNewRecord)
+				setInputRecord(initalNewRecord)
+				setShowEditor(false)
 				getAllRecords()
 			})
-			.catch(error => console.error(error))
+			.catch(console.error)
 	}
 
 
@@ -72,7 +73,7 @@ export default function RecordsContainer() {
 	}
 
 	function editRecord(id, text) {
-		setNewRecord({ id, text });
+		setInputRecord({ id, text });
 		setShowEditor(true);
 	}
 
@@ -91,10 +92,14 @@ export default function RecordsContainer() {
 			{
 				showEditor
 					? (<RecordInput
-						record={newRecord}
-						onNameChanged={(name) => { setNewRecord(prev => ({ ...prev, name })) }}
-						onTextChanged={(text) => { setNewRecord(prev => ({ ...prev, text })) }}
-						onPostClick={() => postNewRecord(newRecord.name, newRecord.text)}
+						record={inputRecord}
+						onNameChanged={(name) => { setInputRecord(prev => ({ ...prev, name })) }}
+						onTextChanged={(text) => { setInputRecord(prev => ({ ...prev, text })) }}
+						onPostClick={() => {
+							(records.hasOwnProperty(inputRecord.id))
+								? putRecord(inputRecord.id, inputRecord.text)
+								: postNewRecord(inputRecord.id, inputRecord.text)
+						}}
 					/>)
 					: (<Button
 						caption='Add'
