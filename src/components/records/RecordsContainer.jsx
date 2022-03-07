@@ -23,15 +23,14 @@ export default function RecordsContainer() {
 		return {}
 	}
 
-	useEffect(() => {
-		getAllRecords()
-	}, [])
+	useEffect(getAllRecords, [])
 
 	function postNewRecord(id, text) {
 		recordsAPI.post({ record: { id, text } })
 			.then(res => {
 				console.log(res)
 				setNewRecord(initalNewRecord)
+				setShowEditor(false)
 				getAllRecords()
 			})
 			.catch(error => console.error(error))
@@ -47,7 +46,11 @@ export default function RecordsContainer() {
 			.catch(error => console.error(error))
 	}
 
+
+
 	const [selectedIds, setSelectedIds] = useState([])
+	const [selectionMode, setSelectionMode] = useState(false)
+
 	useEffect(() => {
 		console.log('selected:', selectedIds);
 	}, [selectedIds])
@@ -79,27 +82,27 @@ export default function RecordsContainer() {
 		return {}
 	}
 
+	const [showEditor, setShowEditor] = useState(false);
+
 	return (
 		<div>
-			<RecordInput
+
+			<Button
+				caption='Add'
+				click={() => setShowEditor(true)}
+			/>
+
+			{showEditor ? (<RecordInput
 				record={newRecord}
 				onNameChanged={(name) => { setNewRecord(prev => ({ ...prev, name })) }}
 				onTextChanged={(text) => { setNewRecord(prev => ({ ...prev, text })) }}
-			/>
-			<Button
-				caption='Post'
-				click={() => { postNewRecord(newRecord.name, newRecord.text) }}
-			/>
-			<Button
-				caption='Put'
-				click={() => { putRecord(newRecord.name, newRecord.text) }}
-			/>
-			<Button
-				caption='Del'
-				click={delSelectedRecords}
-			/>
+				onPostClick={() => postNewRecord(newRecord.name, newRecord.text)}
+			/>) : ''
+			}
+
 			<Records
 				records={records}
+				mode={{ selection: selectionMode }}
 				onSelectionChanged={(id, checked) => {
 					if (checked)
 						setSelectedIds(prev => [...prev, id])
@@ -113,6 +116,7 @@ export default function RecordsContainer() {
 				editClick={editRecord}
 				delClick={delRecord}
 			/>
+
 		</div>
 	)
 }
