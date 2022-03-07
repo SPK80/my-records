@@ -73,6 +73,7 @@ export default function RecordsContainer() {
 
 	function editRecord(id, text) {
 		setNewRecord({ id, text });
+		setShowEditor(true);
 	}
 
 	function delRecord(id) {
