@@ -87,17 +87,18 @@ export default function RecordsContainer() {
 	return (
 		<div>
 
-			<Button
-				caption='Add'
-				click={() => setShowEditor(true)}
-			/>
-
-			{showEditor ? (<RecordInput
-				record={newRecord}
-				onNameChanged={(name) => { setNewRecord(prev => ({ ...prev, name })) }}
-				onTextChanged={(text) => { setNewRecord(prev => ({ ...prev, text })) }}
-				onPostClick={() => postNewRecord(newRecord.name, newRecord.text)}
-			/>) : ''
+			{
+				showEditor
+					? (<RecordInput
+						record={newRecord}
+						onNameChanged={(name) => { setNewRecord(prev => ({ ...prev, name })) }}
+						onTextChanged={(text) => { setNewRecord(prev => ({ ...prev, text })) }}
+						onPostClick={() => postNewRecord(newRecord.name, newRecord.text)}
+					/>)
+					: (<Button
+						caption='Add'
+						click={() => setShowEditor(true)}
+					/>)
 			}
 
 			<Records
