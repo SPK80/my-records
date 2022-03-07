@@ -23,7 +23,7 @@ export default function Record({ name, value, onSelectionChanged, editClick, del
 
 			<Button
 				caption='Edit'
-				click={() => { editClick(name) }}
+				click={() => { editClick(name, value) }}
 			/>
 
 		</div >

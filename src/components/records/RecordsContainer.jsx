@@ -68,24 +68,15 @@ export default function RecordsContainer() {
 		}
 	}
 
-	const [editingId, setEditingId] = useState('')
-	useEffect(() => {
-		console.log('editingId:', editingId);
-	}, [editingId])
-
 	function editRecord(id, text) {
 		setNewRecord({ id, text });
-		setEditingId(id);
 	}
 
 	function delRecord(id) {
 		recordsAPI.delete(id)
-			.then(res => {
-				getAllRecords()
-			})
-			.catch(error => console.error(error))
+			.then(getAllRecords)
+			.catch(console.error)
 		return {}
-
 	}
 
 	return (
@@ -105,7 +96,7 @@ export default function RecordsContainer() {
 			/>
 			<Button
 				caption='Del'
-				click={() => { delSelectedRecords() }}
+				click={delSelectedRecords}
 			/>
 			<Records
 				records={records}
@@ -119,16 +110,8 @@ export default function RecordsContainer() {
 							return s
 						})
 				}}
-				editClick={
-					(id, text) => {
-						editRecord(id, text);
-					}
-				}
-				delClick={
-					(id) => {
-						delRecord(id)
-					}
-				}
+				editClick={editRecord}
+				delClick={delRecord}
 			/>
 		</div>
 	)
