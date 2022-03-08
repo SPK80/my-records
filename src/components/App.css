@@ -50,3 +50,10 @@
 .RecordValue{
 	margin: 10px;	
 }
+
+.ToolsBar{
+	margin: 0px 10px 0px 10px;	
+	padding: 5px;
+	/* background-color: cornflowerblue; */
+	
+}

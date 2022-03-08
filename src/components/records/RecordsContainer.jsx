@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Records from './Records';
 import RecordInput from './RecordInput';
 import recordsAPI from './recordsAPI';
-
-import Button from './Button.jsx';
+import ToolsBar from './ToolsBar';
 
 export default function RecordsContainer() {
 	const initalNewRecord = {
@@ -101,10 +100,9 @@ export default function RecordsContainer() {
 								: postNewRecord(inputRecord.id, inputRecord.text)
 						}}
 					/>)
-					: (<Button
-						caption='Add'
-						click={() => setShowEditor(true)}
-					/>)
+					: <ToolsBar
+						onAdd={() => setShowEditor(true)}
+					/>
 			}
 
 			<Records

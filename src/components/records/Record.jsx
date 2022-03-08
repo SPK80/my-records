@@ -1,8 +1,6 @@
-// import { useState } from "react";
 import Button from "./Button.jsx";
 
 export default function Record({ mode, name, value, onSelectionChanged, editClick, delClick }) {
-	// const [id, setID] = useState(name);
 
 	return (
 		<div className="Record">
