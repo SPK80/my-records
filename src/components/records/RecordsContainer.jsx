@@ -24,6 +24,21 @@ export default function RecordsContainer() {
 
 	useEffect(getAllRecords, [])
 
+	function saveRecord(id, text) {
+		(
+			records.hasOwnProperty(id)
+				? recordsAPI.put({ record: { id, text } })
+				: recordsAPI.post({ record: { id, text } })
+		)
+			.then(res => {
+				console.log(res)
+				setInputRecord(initalNewRecord)
+				setShowEditor(false)
+				getAllRecords()
+			})
+			.catch(console.error)
+	}
+
 	function postNewRecord(id, text) {
 		recordsAPI.post({ record: { id, text } })
 			.then(res => {
@@ -45,8 +60,6 @@ export default function RecordsContainer() {
 			})
 			.catch(console.error)
 	}
-
-
 
 	const [selectedIds, setSelectedIds] = useState([])
 	const [selectionMode, setSelectionMode] = useState(false)
@@ -87,19 +100,18 @@ export default function RecordsContainer() {
 
 	return (
 		<div>
-
 			{
 				showEditor
-					? (<RecordInput
-						record={inputRecord}
-						onNameChanged={(name) => { setInputRecord(prev => ({ ...prev, name })) }}
-						onTextChanged={(text) => { setInputRecord(prev => ({ ...prev, text })) }}
-						onPostClick={() => {
-							(records.hasOwnProperty(inputRecord.id))
-								? putRecord(inputRecord.id, inputRecord.text)
-								: postNewRecord(inputRecord.id, inputRecord.text)
-						}}
-					/>)
+					? (
+						<RecordInput
+							record={inputRecord}
+							onNameChanged={(name) => { setInputRecord(prev => ({ ...prev, name })) }}
+							onTextChanged={(text) => { setInputRecord(prev => ({ ...prev, text })) }}
+							onPostClick={() => {
+								saveRecord(inputRecord.id, inputRecord.text)
+							}}
+						/>
+					)
 					: <ToolsBar
 						onAdd={() => setShowEditor(true)}
 					/>
