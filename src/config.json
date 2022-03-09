@@ -1,6 +1,5 @@
 {
 	"server": {
-		"host": "https://guarded-tundra-65297.herokuapp.com",
-		"port": "80"
+		"host": "https://guarded-tundra-65297.herokuapp.com"
 	}
 }
