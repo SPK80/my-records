@@ -39,28 +39,6 @@ export default function RecordsContainer() {
 			.catch(console.error)
 	}
 
-	function postNewRecord(id, text) {
-		recordsAPI.post({ record: { id, text } })
-			.then(res => {
-				console.log(res)
-				setInputRecord(initalNewRecord)
-				setShowEditor(false)
-				getAllRecords()
-			})
-			.catch(console.error)
-	}
-
-	function putRecord(id, text) {
-		recordsAPI.put({ record: { id, text } })
-			.then(res => {
-				console.log(res)
-				setInputRecord(initalNewRecord)
-				setShowEditor(false)
-				getAllRecords()
-			})
-			.catch(console.error)
-	}
-
 	const [selectedIds, setSelectedIds] = useState([])
 	const [selectionMode, setSelectionMode] = useState(false)
 
@@ -105,11 +83,9 @@ export default function RecordsContainer() {
 					? (
 						<RecordInput
 							record={inputRecord}
-							onNameChanged={(name) => { setInputRecord(prev => ({ ...prev, name })) }}
+							onNameChanged={(id) => { setInputRecord(prev => ({ ...prev, id })) }}
 							onTextChanged={(text) => { setInputRecord(prev => ({ ...prev, text })) }}
-							onPostClick={() => {
-								saveRecord(inputRecord.id, inputRecord.text)
-							}}
+							onPostClick={() => saveRecord(inputRecord.id, inputRecord.text)}
 						/>
 					)
 					: <ToolsBar
