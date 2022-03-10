@@ -1,21 +1,10 @@
 import Button from "./Button.jsx";
 
-export default function Record({ mode, name, value, onSelectionChanged, editClick, delClick }) {
+export default function Record({ name, value, editClick, delClick }) {
 
 	return (
 		<div className="Record">
-
-			{
-				mode.selection
-					? (<input
-						type='checkbox'
-						onChange={(e) => onSelectionChanged(name, e.target.checked)}
-					></input>)
-					: ''
-			}
-
 			<span className="RecordName">{name}</span>
-
 			<pre className="RecordValue">{value}</pre>
 
 			<Button

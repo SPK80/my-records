@@ -39,29 +39,6 @@ export default function RecordsContainer() {
 			.catch(console.error)
 	}
 
-	const [selectedIds, setSelectedIds] = useState([])
-	const [selectionMode, setSelectionMode] = useState(false)
-
-	useEffect(() => {
-		console.log('selected:', selectedIds);
-	}, [selectedIds])
-
-	async function delSelectedRecords() {
-		if (selectedIds.length < 1) return;
-
-		try {
-			for (const id of selectedIds) {
-				const res = await recordsAPI.delete(id)
-				console.log(res);
-			}
-			getAllRecords();
-			setSelectedIds([]);
-		}
-		catch (error) {
-			console.error(error)
-		}
-	}
-
 	function editRecord(id, text) {
 		setInputRecord({ id, text });
 		setShowEditor(true);
@@ -94,18 +71,7 @@ export default function RecordsContainer() {
 			}
 
 			<Records
-				records={records}
-				mode={{ selection: selectionMode }}
-				onSelectionChanged={(id, checked) => {
-					if (checked)
-						setSelectedIds(prev => [...prev, id])
-					else
-						setSelectedIds(prev => {
-							const s = [...prev];
-							s.splice(prev.indexOf(id), 1)
-							return s
-						})
-				}}
+				records={records}				
 				editClick={editRecord}
 				delClick={delRecord}
 			/>
