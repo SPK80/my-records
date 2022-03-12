@@ -1,6 +1,6 @@
 import Button from "./Button.jsx";
 
-export default function RecordInput({ record, onNameChanged, onTextChanged, onPostClick }) {
+export default function RecordInput({ record, onNameChanged, onTextChanged, onPostClick, onCanselClick }) {
 	return (
 		<div className="New-Record">
 
@@ -19,6 +19,11 @@ export default function RecordInput({ record, onNameChanged, onTextChanged, onPo
 			<Button
 				caption='Post'
 				click={onPostClick}
+			/>
+
+			<Button
+				caption='Cansel'
+				click={onCanselClick}
 			/>
 
 		</div>

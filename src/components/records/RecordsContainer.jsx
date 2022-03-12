@@ -63,6 +63,7 @@ export default function RecordsContainer() {
 							onNameChanged={(id) => { setInputRecord(prev => ({ ...prev, id })) }}
 							onTextChanged={(text) => { setInputRecord(prev => ({ ...prev, text })) }}
 							onPostClick={() => saveRecord(inputRecord.id, inputRecord.text)}
+							onCanselClick={() => setShowEditor(false)}
 						/>
 					)
 					: <ToolsBar
@@ -71,7 +72,7 @@ export default function RecordsContainer() {
 			}
 
 			<Records
-				records={records}				
+				records={records}
 				editClick={editRecord}
 				delClick={delRecord}
 			/>
