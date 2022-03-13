@@ -1,6 +1,8 @@
-import Button from "./Button.jsx";
+import Button from "../Button.jsx";
+import React, { useState } from 'react';
 
-export default function RecordInput({ record, onNameChanged, onTextChanged, onPostClick, onCanselClick }) {
+export default function RecordInput({ record, changed, onNameChanged, onTextChanged, onPostClick, onCanselClick }) {
+
 	return (
 		<div className="New-Record">
 
@@ -15,11 +17,15 @@ export default function RecordInput({ record, onNameChanged, onTextChanged, onPo
 				value={record.text}
 			>
 			</textarea>
-
-			<Button
-				caption='Post'
-				click={onPostClick}
-			/>
+			{
+				changed
+					? (<Button
+						caption='Post'
+						click={onPostClick}
+					/>
+					)
+					: ''
+			}
 
 			<Button
 				caption='Cansel'
