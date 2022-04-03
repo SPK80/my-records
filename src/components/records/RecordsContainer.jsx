@@ -19,17 +19,13 @@ export default function RecordsContainer() {
 	}
 
 	function newRecord() {
-		setInputRecordState({
-			show: true,
-			record: { id: '', text: '' }
-		});
+		setInputRecordState(initalInputRecord);
+		setInputShow(true);
 	}
 
 	function editRecord(id, text) {
-		setInputRecordState({
-			show: true,
-			record: { id, text }
-		});
+		setInputRecordState({ id, text });
+		setInputShow(true);
 	}
 
 	useEffect(getAllRecords, [])
@@ -41,26 +37,22 @@ export default function RecordsContainer() {
 		return {}
 	}
 
-	const initalInput = {
-		show: false,
-		record: {
-			id: '',
-			text: ''
-		}
-	}
-
-	const [inputRecordState, setInputRecordState] = useState(initalInput);
+	const initalInputRecord = { id: '', text: '' };
+	const [inputRecordState, setInputRecordState] = useState(initalInputRecord);
+	const [inputShow, setInputShow] = useState(false);
 
 	return (
 		<div>
 			{
-				inputRecordState.show
+				inputShow
 					? (
 						<RecordInputContainer
-							record={inputRecordState.record}
+							record={inputRecordState}
 							saved={() => {
-								getAllRecords()
-								setInputRecordState(initalInput)
+								getAllRecords();
+								setInputRecordState(initalInputRecord);
+								setInputShow(false);
+
 							}}
 						/>
 					)
