@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Records from './Records';
 import RecordInput from './RecordInput';
-import recordsAPI from './recordsAPI';
+import recordsAPI from '../../api/recordsAPI';
 import ToolsBar from './ToolsBar';
 
 export default function RecordsContainer() {
@@ -31,7 +31,7 @@ export default function RecordsContainer() {
 				: recordsAPI.post({ record: { id, text } })
 		)
 			.then(res => {
-				console.log(res)
+				// console.log(res)
 				setInputRecord(initalNewRecord)
 				setShowEditor(false)
 				getAllRecords()
