@@ -1,16 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import Records from './Records';
-import RecordInput from './RecordInput';
 import recordsAPI from '../../api/recordsAPI';
 import ToolsBar from './ToolsBar';
+import RecordInputContainer from './RecordInput/RecordInputContainer.jsx';
 
 export default function RecordsContainer() {
-	const initalNewRecord = {
-		id: '',
-		text: ''
-	}
+
 	const [records, setRecords] = useState({})
-	const [inputRecord, setInputRecord] = useState(initalNewRecord)
 
 	function getAllRecords() {
 		recordsAPI.get()
@@ -22,27 +18,17 @@ export default function RecordsContainer() {
 		return {}
 	}
 
-	useEffect(getAllRecords, [])
-
-	function saveRecord(id, text) {
-		(
-			records.hasOwnProperty(id)
-				? recordsAPI.put({ record: { id, text } })
-				: recordsAPI.post({ record: { id, text } })
-		)
-			.then(res => {
-				// console.log(res)
-				setInputRecord(initalNewRecord)
-				setShowEditor(false)
-				getAllRecords()
-			})
-			.catch(console.error)
+	function newRecord() {
+		setInputRecordState(initalInputRecord);
+		setInputShow(true);
 	}
 
 	function editRecord(id, text) {
-		setInputRecord({ id, text });
-		setShowEditor(true);
+		setInputRecordState({ id, text });
+		setInputShow(true);
 	}
+
+	useEffect(getAllRecords, [])
 
 	function delRecord(id) {
 		recordsAPI.delete(id)
@@ -51,27 +37,32 @@ export default function RecordsContainer() {
 		return {}
 	}
 
-	const [showEditor, setShowEditor] = useState(false);
+	const initalInputRecord = { id: '', text: '' };
+	const [inputRecordState, setInputRecordState] = useState(initalInputRecord);
+	const [inputShow, setInputShow] = useState(false);
 
 	return (
 		<div>
 			{
-				showEditor
+				inputShow
 					? (
-						<RecordInput
-							record={inputRecord}
-							onNameChanged={(id) => { setInputRecord(prev => ({ ...prev, id })) }}
-							onTextChanged={(text) => { setInputRecord(prev => ({ ...prev, text })) }}
-							onPostClick={() => saveRecord(inputRecord.id, inputRecord.text)}
+						<RecordInputContainer
+							record={inputRecordState}
+							saved={() => {
+								getAllRecords();
+								setInputRecordState(initalInputRecord);
+								setInputShow(false);
+
+							}}
 						/>
 					)
 					: <ToolsBar
-						onAdd={() => setShowEditor(true)}
+						onAdd={newRecord}
 					/>
 			}
 
 			<Records
-				records={records}				
+				records={records}
 				editClick={editRecord}
 				delClick={delRecord}
 			/>
