@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Button from '../records/Button.jsx';
+import './Login.css';
 
 export default function Login({ onLoged }) {
 
@@ -14,43 +15,38 @@ export default function Login({ onLoged }) {
 	const [showPassword, setShowPassword] = useState(false);
 
 	return (
-		<form onSubmit={onSubmit}>
-			<div>
-				<label>
-					<span>User</span>
+		<div className='Login_Holder'>
+			<form onSubmit={onSubmit}>
+				<div>
+					<span className='Login_Label'>User</span>
 					<input
 						type="text"
 						value={userName}
 						onChange={event => setUserName(event.target.value)}
 					/>
-				</label>
-			</div>
-
-			<div>
-				<label>
-					<span>Password</span>
+				</div>
+				<div>
+					<span className='Login_Label'>Password</span>
 					<input
 						type={showPassword ? "text" : "password"}
 						value={userPassword}
 						onChange={event => setUserPassword(event.target.value)}
 					/>
-				</label>
-				<label>
 					<input
 						type="checkbox"
 						checked={showPassword}
 						onChange={(event) => setShowPassword(event.target.checked)}
 					/>
 					<span>show</span>
-				</label>
-			</div>
-			<div>
-				<Button
-					caption='Login'
-					type="submit"
-					value="Submit"
-				/>
-			</div>
-		</form>
+				</div>
+				<div>
+					<Button
+						caption='Login'
+						type="submit"
+						value="Submit"
+					/>
+				</div>
+			</form>
+		</div>
 	);
 }
