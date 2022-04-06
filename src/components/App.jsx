@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './App.css';
 import Header from './Header';
-import { Login } from './Login';
+import Login from './Login';
 import RecordsContainer from "./records";
 
 function App() {
@@ -10,7 +10,10 @@ function App() {
 	return (
 		<div className="App">
 			<Header />
-			{userId ? <RecordsContainer /> : <Login onLoged={(id) => setUserId(id)} />}
+			{userId ?
+				<RecordsContainer />
+				:
+				<Login onLoged={(id) => setUserId(id)} />}
 		</div>
 	);
 }
