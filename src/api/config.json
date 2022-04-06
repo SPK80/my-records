@@ -1,5 +1,5 @@
 {
 	"server": {
-		"host": "https://guarded-tundra-65297.herokuapp.com"
+		"host": "http://localhost:8000"
 	}
 }
